@@ -16,7 +16,6 @@ type Query {
 
 # this schema allows the following mutation:
 type Mutation {
-
   upvoteNews (
     newsId: ID!
   ): News
@@ -24,6 +23,13 @@ type Mutation {
   downvoteNews (
     newsId: ID!
   ): News
+}
+
+# we need to tell the server which types represent the root query
+# and root mutation types. We call them RootQuery and RootMutation by convention.
+schema {
+  query: Query
+  mutation: Mutation
 }
 
 `;

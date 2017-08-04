@@ -1,11 +1,9 @@
-import {makeExecutableSchema} from 'graphql-tools';
-
 const typeDefs = `
 
 type News {
   id: ID!
   title: String
-  url: String
+  url: String!
   votes: Int
 }
 
@@ -23,6 +21,8 @@ type Mutation {
   downvoteNews (
     newsId: ID!
   ): News
+  
+  addNews(url: String!, title: String, votes: Int): News
 }
 
 # we need to tell the server which types represent the root query
@@ -34,6 +34,6 @@ schema {
 
 `;
 
-const schema = makeExecutableSchema({ typeDefs });
-
-export default schema;
+module.exports = {
+    typeDefs
+};

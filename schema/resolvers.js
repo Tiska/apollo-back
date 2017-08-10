@@ -35,12 +35,7 @@ const resolvers = {
     },
     Subscription: {
         newsAdded: {
-            subscribe: withFilter(
-                () => pubsub.asyncIterator('newsAdded'),
-                (payload, variables) => {
-                    return payload.newsId === variables.newsId;
-                }
-            )
+            subscribe: () => pubsub.asyncIterator('newsAdded'),
         }
     }
 

@@ -27,6 +27,7 @@ type Mutation {
 
 type Subscription {
   newsAdded: News
+  newsVoted: News
 }
 
 # we need to tell the server which types represent the root query

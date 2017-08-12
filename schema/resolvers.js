@@ -1,6 +1,8 @@
 const {News} = require('./mongodb-connector');
 const ObjectId = (require('mongoose').Types.ObjectId);
 const {PubSub, withFilter} = require('graphql-subscriptions');
+const rp = require('request-promise-native');
+const cheerio = require('cheerio');
 
 const pubsub = new PubSub();
 
@@ -23,8 +25,22 @@ const resolvers = {
             pubsub.publish('newsVoted', {newsVoted: news});
             return news;
         },
-        addNews: (root, args) => {
-            let newNews = new News({title: args.title, url: args.url, votes: 0});
+        addNews: async (root, args) => {
+
+            let title = 'No title';
+
+            try {
+                if(!args.title){
+                    let body = await rp(args.url);
+                    let $ = cheerio.load(body);
+                    title = $("title").text();
+                }
+            }
+            catch(e) {
+                console.log('there was an error getting title page');
+            }
+
+            let newNews = new News({title: args.title ? args.title : title, url: args.url, votes: 0});
             newNews.save();
             pubsub.publish('newsAdded', {newsAdded: newNews});
             return newNews;

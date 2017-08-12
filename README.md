@@ -1,5 +1,9 @@
 # Apollo Back
 
+Server start on port 4000 and expect front on port 3000.
+
+Require a mongo database exposed on default port 27017 (use docker command bellow).
+
 ## Install
 
 npm install

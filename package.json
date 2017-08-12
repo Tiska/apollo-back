@@ -3,15 +3,12 @@
   "version": "1.0.0",
   "description": "Apollo express backend",
   "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "keywords": [
     "apollo",
     "express"
   ],
   "author": "abody",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "apollo-server-express": "^1.0.4",
     "body-parser": "^1.17.2",
